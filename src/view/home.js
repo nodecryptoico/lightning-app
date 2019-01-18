@@ -5,7 +5,8 @@ import PropTypes from 'prop-types';
 import Background from '../component/background';
 import MainContent from '../component/main-content';
 import { Header, Title } from '../component/header';
-import { color } from '../component/style';
+import { createStyles, maxWidth } from '../component/media-query';
+import { color, breakWidth, smallBreakWidth } from '../component/style';
 import { H4Text } from '../component/text';
 import Icon from '../component/icon';
 import ChannelIcon from '../asset/icon/channel';
@@ -83,7 +84,7 @@ HomeView.propTypes = {
 // Balance Display
 //
 
-const balanceStyles = StyleSheet.create({
+const baseBalanceStyles = {
   wrapper: {
     flex: 1,
     justifyContent: 'center',
@@ -92,7 +93,23 @@ const balanceStyles = StyleSheet.create({
     marginTop: 30,
     marginBottom: 5,
   },
-});
+};
+
+const balanceStyles = createStyles(
+  baseBalanceStyles,
+
+  maxWidth(breakWidth, {
+    wrapper: {
+      width: 350,
+    },
+  }),
+
+  maxWidth(smallBreakWidth, {
+    wrapper: {
+      width: 250,
+    },
+  })
+);
 
 const BalanceDisplay = ({
   depositLabel,
